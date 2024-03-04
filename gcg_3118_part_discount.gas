@@ -1,0 +1,35 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Coded by: ERIC
+'Project Start Date: 12/9/2011
+'Quote 2491
+'Hooks 10120 - populate
+'Hook 10210 - script 1 button
+V.Local.sParam.Declare(String)
+V.Local.sPart.Declare(String)
+V.Local.sRev.Declare(String)
+V.Local.sPartRev.Declare(String)
+'
+
+F.Intrinsic.Control.If(V.Caller.Hook,=,10120)
+	V.Passed.000068.Set("Discount")
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Caller.Hook,=,10210)
+	F.Intrinsic.String.GSSPartString(V.Passed.000007,V.Passed.000008,V.Local.sPartRev)
+	F.intrinsic.String.Concat(V.Caller.CompanyCode,"!*!",V.Caller.Terminal,"!*!","GAB","!*!",V.Caller.User,"!*!",V.Local.sPartRev,V.Local.sParam)
+	F.Global.General.CallWrapperSync(4001,V.Local.sParam)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.End
+
+Program.Sub.Main.End
+
+
